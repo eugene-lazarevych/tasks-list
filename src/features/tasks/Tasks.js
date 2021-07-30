@@ -117,7 +117,7 @@ export function Tasks() {
                 source,
                 destination
             );
-            setTaskColumns(result);
+            setTaskColumns({ todoTasksColumn: result.todoTasksColumn, doneTasksColumn: result.doneTasksColumn });
         }
     };
 
