@@ -110,7 +110,6 @@ export function Tasks() {
                 source.index,
                 destination.index
             );
-            console.log(items);
             setTaskColumns({ todoTasksColumn: items.todoTasksColumn, doneTasksColumn: items.doneTasksColumn });
         } else {
             const result = move(
@@ -145,7 +144,7 @@ export function Tasks() {
                   >
                     {column.map((item, index) => (
                       <Draggable
-                        key={item.id}
+                        key={item.key}
                         draggableId={item.key}
                         index={index}>
                         {(provided, snapshot) => (
