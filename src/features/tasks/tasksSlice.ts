@@ -2,23 +2,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { fetchTasks } from './tasksAPI';
 
-export interface TaskInterface {
-  id?: number,
-  key?: string,
-  title: string,
-  status: string,
-}
-export interface TasksState {
-  list: Array<TaskInterface>;
-  status: 'idle' | 'loading' | 'failed';
-}
-
 const initialState: TasksState = {
   list: [],
   status: 'idle',
 };
 
-const prepareData = (data) => (data.map((task, index) => ({ ...task, id: `task${index}`, key: `task${index}` })));
+const prepareData = (data: any) => (data.map((task: any, index: any) => ({ ...task, key: `task${index}` })));
 
 export const getTasksAsync = createAsyncThunk(
   'tasks/fetchTasks',

@@ -17,7 +17,6 @@ import {
   selectTodoTasks,
   selectDoneTasks,
 } from './tasksSlice';
-import { TaskCard } from './TaskCard';
 
 const reorder = (list, droppableId, startIndex, endIndex) => {
     const result = Array.from(list[droppableId]);
@@ -75,6 +74,9 @@ const useStyles = makeStyles((theme) =>
     },
     columnDraggingOver: {
       background: 'lightblue',
+    },
+    crossedOut: {
+      textDecoration: 'line-through',
     }
   }),
 );
@@ -144,7 +146,7 @@ export function Tasks() {
                     {column.map((item, index) => (
                       <Draggable
                         key={item.id}
-                        draggableId={item.id}
+                        draggableId={item.key}
                         index={index}>
                         {(provided, snapshot) => (
                           <Card
@@ -156,7 +158,7 @@ export function Tasks() {
                                 provided.draggableProps.style
                             )}>
                             <CardContent>
-                              <Typography variant="h6" component="h3">
+                              <Typography variant="h6" component="h3" className={`${Object.keys(taskColumns)[columnIndex] === 'doneTasksColumn' ? classes.crossedOut : ''}`}>
                                 {item.title}
                               </Typography>
                             </CardContent>
