@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 import { fetchTasks } from './tasksAPI';
 
 const initialState: TasksState = {
@@ -20,14 +20,7 @@ export const getTasksAsync = createAsyncThunk(
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {
-    markAsDone: (state, action: PayloadAction<string>) => {
-      state.list.map((task) => task.key === action.payload ? { ...task, status: 'done' } : task);
-    },
-    markAsTodo: (state, action: PayloadAction<string>) => {
-      state.list.map((task) => task.key === action.payload ? { ...task, status: 'todo' } : task);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getTasksAsync.pending, (state) => {
@@ -39,8 +32,6 @@ export const tasksSlice = createSlice({
       });
   },
 });
-
-export const { markAsDone, markAsTodo } = tasksSlice.actions;
 
 export const selectTodoTasks = (state: RootState) => state.tasks.list.filter((task) => task.status === 'todo');
 export const selectDoneTasks = (state: RootState) => state.tasks.list.filter((task) => task.status === 'done');
